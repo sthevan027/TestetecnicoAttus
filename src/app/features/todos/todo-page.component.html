@@ -1,0 +1,56 @@
+<mat-toolbar color="primary" class="toolbar">
+  <span class="brand">To-dos (NgRx)</span>
+  <span class="spacer"></span>
+  <a mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Usuários</a>
+  <a mat-button routerLink="/todos" routerLinkActive="active">To-dos</a>
+  <a mat-button routerLink="/challenges" routerLinkActive="active">Desafios</a>
+  <button mat-icon-button type="button" (click)="reload()" aria-label="Recarregar">
+    <mat-icon>refresh</mat-icon>
+  </button>
+</mat-toolbar>
+
+<main class="page">
+  @if (vm$ | async; as vm) {
+    @if (vm.loading) {
+      <div class="state center">
+        <mat-progress-spinner diameter="48" mode="indeterminate" />
+        <p>Carregando tarefas…</p>
+      </div>
+    } @else if (vm.error) {
+      <div class="state error" role="alert">
+        <mat-icon color="warn">error</mat-icon>
+        <p>{{ vm.error }}</p>
+      </div>
+    } @else {
+      <div class="columns">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Pendentes</mat-card-title>
+            <mat-card-subtitle>{{ vm.pending.length }} itens</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            @for (t of vm.pending; track t.id) {
+              <div class="row">
+                <mat-checkbox [checked]="false" (change)="toggle(t.id)">{{ t.title }}</mat-checkbox>
+              </div>
+            }
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Todas</mat-card-title>
+            <mat-card-subtitle>{{ vm.all.length }} itens</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            @for (t of vm.all; track t.id) {
+              <div class="row">
+                <mat-checkbox [checked]="t.completed" (change)="toggle(t.id)">{{ t.title }}</mat-checkbox>
+              </div>
+            }
+          </mat-card-content>
+        </mat-card>
+      </div>
+    }
+  }
+</main>

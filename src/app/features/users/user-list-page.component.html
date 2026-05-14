@@ -1,0 +1,56 @@
+<mat-toolbar color="primary" class="toolbar">
+  <span class="brand">Attus — Desafio Front-End</span>
+  <span class="spacer"></span>
+  <a mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+    Usuários
+  </a>
+  <a mat-button routerLink="/todos" routerLinkActive="active">To-dos (NgRx)</a>
+  <a mat-button routerLink="/challenges" routerLinkActive="active">Desafios</a>
+</mat-toolbar>
+
+<main class="page">
+  <div class="toolbar-row">
+    <mat-form-field appearance="outline" class="filter">
+      <mat-label>Filtrar por nome</mat-label>
+      <input matInput [formControl]="nameFilter" placeholder="Digite para filtrar" />
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+
+    <button mat-flat-button color="warn" class="new-btn" type="button" (click)="openCreate()">
+      <mat-icon>person_add</mat-icon>
+      Novo usuário
+    </button>
+  </div>
+
+  @if (vm$ | async; as vm) {
+    @if (vm.loading) {
+      <div class="state center">
+        <mat-progress-spinner diameter="48" mode="indeterminate" />
+        <p>Carregando usuários…</p>
+      </div>
+    } @else if (vm.error) {
+      <div class="state error" role="alert">
+        <mat-icon color="warn">error</mat-icon>
+        <p>{{ vm.error }}</p>
+      </div>
+    } @else if (vm.users.length === 0) {
+      <div class="state">
+        <p>Nenhum usuário encontrado para o filtro atual.</p>
+      </div>
+    } @else {
+      <div class="grid">
+        @for (u of vm.users; track u.id) {
+          <mat-card class="card">
+            <mat-card-header>
+              <mat-card-title>{{ u.name }}</mat-card-title>
+              <mat-card-subtitle>{{ u.email }}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-actions align="end">
+              <button mat-stroked-button color="primary" type="button" (click)="edit(u)">Editar</button>
+            </mat-card-actions>
+          </mat-card>
+        }
+      </div>
+    }
+  }
+</main>

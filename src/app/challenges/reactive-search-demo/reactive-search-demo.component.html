@@ -1,0 +1,24 @@
+<mat-card class="card">
+  <mat-card-header>
+    <mat-card-title>Busca reativa (debounce 500 ms)</mat-card-title>
+    <mat-card-subtitle>Item 2.3 — async pipe, switchMap cancela requisição anterior</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p><a routerLink="/challenges/cart">Ir para carrinho (Signals)</a></p>
+
+    <mat-form-field appearance="outline" class="field">
+      <mat-label>Buscar usuário por nome</mat-label>
+      <input matInput [formControl]="query" />
+    </mat-form-field>
+
+    @if (loading()) {
+      <mat-progress-bar mode="indeterminate" />
+    }
+
+    <ul class="list">
+      @for (u of (results$ | async) ?? []; track u.id) {
+        <li>{{ u.name }} — {{ u.email }}</li>
+      }
+    </ul>
+  </mat-card-content>
+</mat-card>

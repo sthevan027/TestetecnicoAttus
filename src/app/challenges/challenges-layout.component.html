@@ -1,0 +1,12 @@
+<mat-toolbar color="primary" class="toolbar">
+  <span class="brand">Desafios (código)</span>
+  <span class="spacer"></span>
+  <a mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Usuários</a>
+  <a mat-button routerLink="/todos" routerLinkActive="active">To-dos</a>
+  <a mat-button routerLink="/challenges/search" routerLinkActive="active">Busca reativa</a>
+  <a mat-button routerLink="/challenges/cart" routerLinkActive="active">Carrinho (Signals)</a>
+</mat-toolbar>
+
+<main class="page">
+  <router-outlet />
+</main>

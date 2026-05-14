@@ -11,6 +11,11 @@
 npm-debug.log
 yarn-error.log
 
+# Environment variables (secrets)
+.env
+.env.*
+!.env.example
+
 # IDEs and editors
 .idea/
 .project
@@ -28,8 +33,9 @@ yarn-error.log
 !.vscode/extensions.json
 .history/*
 
-# Miscellaneous
-/.angular/cache
+# Misc / local
+_doc_extract.txt
+
 .sass-cache/
 /connect.lock
 /coverage
@@ -40,3 +46,12 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+#ide
+.vscode
+.claude
+.cursor
+
+#angular
+.angular
+

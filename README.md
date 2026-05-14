@@ -1,59 +1,62 @@
-# AttusApp
+# Attus — Desafio técnico Front-End (Angular)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.26.
+**Índice — estrutura do código e onde está cada resposta do desafio:** [docs/estrutura-e-respostas.md](docs/estrutura-e-respostas.md)
 
-## Development server
+Aplicação em **Angular 19** com **Angular Material**, **NgRx** (usuários + to-dos), **RxJS**, **Signals** (demonstração do carrinho) e testes com **Jest** (`jest-preset-angular`).
 
-To start a local development server, run:
+## Pré-requisitos
 
-```bash
-ng serve
-```
+- [Node.js](https://nodejs.org/) LTS
+- [pnpm](https://pnpm.io/)
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Instalação
 
 ```bash
-ng generate component component-name
+pnpm install
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Executar em desenvolvimento
 
 ```bash
-ng generate --help
+pnpm start
 ```
 
-## Building
+Abra `http://localhost:4200/`. Os dados de usuários e to-dos são servidos por um **HttpInterceptor** mock (`src/app/mocks/mock-api.interceptor.ts`), sem backend externo.
 
-To build the project run:
+## Build de produção
 
 ```bash
-ng build
+pnpm build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## Testes e cobertura
 
 ```bash
-ng test
+pnpm test
 ```
 
-## Running end-to-end tests
+O relatório de cobertura é gerado em `coverage/`. O limite mínimo (60%) aplica-se ao conjunto de arquivos listado em `jest.config.cjs` (`collectCoverageFrom`): estado NgRx dos usuários e to-dos, validadores compartilhados, função `filtrarEPaginar` e o componente raiz.
 
-For end-to-end (e2e) testing, run:
+## Rotas
 
-```bash
-ng e2e
-```
+| Rota            | Descrição                                      |
+|-----------------|------------------------------------------------|
+| `/`             | Listagem de usuários, filtro, modal criar/editar |
+| `/todos`        | Lista de tarefas NgRx (load + toggle)         |
+| `/challenges`   | Demos: busca reativa (2.3) e carrinho Signals (3.1) |
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Respostas para o documento Word
 
-## Additional Resources
+- **Estrutura do projeto + mapa de cada item:** [docs/estrutura-e-respostas.md](docs/estrutura-e-respostas.md)
+- **Texto para colar no `.docx`:** [docs/respostas-desafio-attus.md](docs/respostas-desafio-attus.md)
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Código dos itens teóricos
+
+- **1.1** — [src/app/challenges/typescript/1.1-produto-refatorado.ts](src/app/challenges/typescript/1.1-produto-refatorado.ts)
+- **1.2** — [src/app/challenges/typescript/1.2-filtrar-epaginar.ts](src/app/challenges/typescript/1.2-filtrar-epaginar.ts)
+- **2.2** (RxJS sem subscribe aninhado) — [src/app/challenges/typescript/2.2-rxjs-sem-nested-subscribe.ts](src/app/challenges/typescript/2.2-rxjs-sem-nested-subscribe.ts)
+- **2.3** — componente e serviço em [src/app/challenges/reactive-search-demo/](src/app/challenges/reactive-search-demo/)
+
+## Stack
+
+Angular 19, Angular Material, NgRx Store/Effects/Devtools, RxJS, Jest, pnpm.

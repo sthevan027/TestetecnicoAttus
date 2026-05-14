@@ -1,0 +1,31 @@
+.card {
+  max-width: 640px;
+}
+
+.total {
+  margin-top: 0.75rem;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.75rem;
+}
+
+.items {
+  margin-top: 0.75rem;
+}
+
+.item {
+  padding: 0.35rem 0;
+}
+
+.title {
+  font-weight: 600;
+}
+
+.line {
+  font-size: 0.9rem;
+  opacity: 0.85;
+}

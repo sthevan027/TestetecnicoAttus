@@ -1,0 +1,29 @@
+<mat-card class="card">
+  <mat-card-header>
+    <mat-card-title>Carrinho (Signals) — item 3.1</mat-card-title>
+    <mat-card-subtitle>Lista em signal, total em computed, output ao mudar total</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p><a routerLink="/challenges/search">Voltar para busca reativa</a></p>
+
+    <mat-divider />
+
+    <div class="items">
+      @for (i of items(); track i.id) {
+        <div class="item">
+          <div class="title">{{ i.label }}</div>
+          <div class="line">{{ i.qty }} × {{ i.unitPrice | currency: 'BRL' }}</div>
+        </div>
+      }
+    </div>
+
+    <p class="total"><strong>Total:</strong> {{ total() | currency: 'BRL' }}</p>
+
+    <div class="actions">
+      <button mat-stroked-button type="button" (click)="addSample()">Adicionar item</button>
+      <button mat-stroked-button type="button" (click)="removeLast()" [disabled]="items().length === 0">
+        Remover último
+      </button>
+    </div>
+  </mat-card-content>
+</mat-card>
